@@ -94,8 +94,8 @@ function getAllEmployee(){
         if(res.data.data.length > 0 ){
             res.data.data.forEach(employee =>{
                 
-                tableData += `
-                <tr>
+                tableData += 
+                `<tr>
                 <td>${a++}</td>
                 <td>${employee.emp_id}</td>
                 <td>${employee.employee_name}</td>
@@ -106,14 +106,16 @@ function getAllEmployee(){
                 <td>${employee.salary}</td>
                 <td>${employee.name}</td>
                 <td>
-                <a type="button" class="btn btn-success" onclick="editEmployee(${ employee.id })">Edit</a>
-                if ( ${authid} == ${ employee.employee_created_by}){
-                <a type="button" class="btn btn-danger but" onclick="deleteEmployee( ${ employee.id })">Delete</a>
+                <a type="button" class="btn btn-success" onclick="editEmployee(${ employee.id })">Edit</a>`;
+
+                if(res.data.authid == employee.employee_created_by){
+
+                    tableData += `<a type="button" class="btn btn-danger but" onclick="deleteEmployee( ${ employee.id })">Delete</a>`;
                 }
+
+                tableData += `</td>
+                </tr>`;
                 
-                </td>
-                </tr>
-                `;
             })
             $("#employeeTable tbody").html(tableData)
         }
